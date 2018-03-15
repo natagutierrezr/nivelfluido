@@ -1,14 +1,10 @@
 
+       
+       
         import QtQuick 2.0
-        import QtQuick.Controls 2.0
+        import QtQuick.Controls 1.4
         import Qt.labs.settings 1.0
        
-        //unik.AppImage
-       
-        //La Sintàxis es la forma o la norma en que se deben escribir las lineas de còdigo para que sean vàlidas o funcionen.
-        //Todo lo que se encuentra entre dos llaves lo podemos denominar o llamar BLOQUE DE CÒDIGO
-        //QML està basado en el lenguaje de programaciòn JavaScript
-        //Programaciòn Orientada a Objetos (POO)
         ApplicationWindow {
             id:app
             visible: true//El parametro de ApplicationWindow llamado visible espera un valor del tipo booleano: true o false
@@ -16,102 +12,234 @@
             height: 400
             title: 'Nivel de Fluidos'
             visibility: 'Maximized'
-            onClosing: Qt.quit()
+            //onClosing: Qt.quit()
        
-            property int fs: 14
+            property int fs: 14//Tamaño de la letra
        
             Settings{
                 id: appSettings
                 category: 'conf-appnf'
                 property string idioma: 'Español'
                 property string unidades: 'Sistema Ingles'
+                property string fecha: '01/01/1970'
             }
+            menuBar: MenuBar {
+                Menu {
+                    title: "Registros"
+                    MenuItem {
+                        text: "Nuevo"
+                        shortcut: "Ctrl+N"
+                        onTriggered: {
+                            modCrearInforme.visible=true
+                        }
+                    }
+                    MenuItem {
+                        text: appSettings.idioma==='Español'?"Salir": "Exit"
+                        shortcut: "Ctrl+Q"
+                        onTriggered: {
+                            Qt.quit()
+                        }
+                    }
+                }
+            }
+       
        
             Rectangle{
                 id: xApp
                 width: 500
                 height: 500
+                //visible: false
                 //border.width: 1
                 anchors.centerIn: parent
                 clip: true
-       
-                Column{
-                    width: parent.width
-                    height: 80
-                    spacing: 20
+                ModCrearInforme{id: modCrearInforme;visible: false;}
 
-                    Row{
-                    width: parent.width
-                    //height: 30
-                    Text {
-                        id: elTexto
-                        text:  !appSettings.idioma==='Español' ? 'Seleccionar Idioma' : 'Select Languaje'
-                        height: cbIdioma.height
-                        font.pixelSize: app.fs
-                        anchors.verticalCenter: parent.verticalCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                    ComboBox{
-                        id: cbIdioma
-                        model: ["Español", "English"]
-                        width: parent.width-elTexto.contentWidth
-                        height: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        onCurrentTextChanged: {
-                              appSettings.idioma = currentText
-                        }
-                    }
-                }
-                    Text {
-                        id: labelIdiomaActual
-                        text:   appSettings.idioma==='Español' ?  'Idioma actual: <b>'+appSettings.idioma+'</b>' :  'Current Lanjuage: <b>'+appSettings.idioma+'</b>'
-                        height: cbIdioma.height
-                        font.pixelSize: app.fs
-                        anchors.verticalCenter: parent.verticalCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                    Row{
-                    width: paren.widht
-
-                    Text {
-                        id: elTextoU
-                        text: 'seleccionar unidades'
-                        height:cbUnidades.height
-                        font.pixelSize: app.fs
-                        anchors.verticalCenter: parent.verticalCenter
-                        verticalAlignment: Text.AlignVCenter
-                        }
-                    ComboBox {
-                        id: cbUnidades
-                        model: ['Sistema Ingles', 'Sistema Internacional']
-                        width: parent.width-elTextoU.contentWidth
-                        height: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        onCurrentTextChanged: {
-                            appsettings.unidades = currentText
-                        }
-                    }
-                    }
 
                 }
+//LAS VARIABLES EMPIEZAN DESDE ACA
+            Column{
+            Row{
+                spacing: app.fs
+                Text {
+                    id: labelCHP
+                    text: CHP
+                    height:30
+                    font.pixelSize: app.fs
+
+                }
+                Rectangle{
+                    width: xmain.width*0.5-labelCHP.contentWidth
+                    height: 30
+                    border.width: 1
+                    clip: true
+                    TextInput{
+                        width: parent.width*0.96
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        maximumLength: 30
+                    }
+                }
+                Text {
+                    id: labelUnityCHP
+                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                    text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
+                    height:30
+                    font.pixelSize: app.fs
             }
-       
-       
-            MouseArea{//Cuando quieras lo borras y listo
-                width: 300
-                height: 300
-                anchors.bottom: parent.bottom
-                onDoubleClicked: Qt.quit()
             }
-       
-            Component.onCompleted: {
-               if(appSettings.idioma==='Español'){
-                    cbIdioma.currentIndex=0
-               }else{
-                    cbIdioma.currentIndex=1
-               }
+            Row{
+                spacing: app.fs
+                Text {
+                    id: labelTHP
+                    text: THP
+                    height:30
+                    font.pixelSize: app.fs
+
+                }
+                Rectangle{
+                    width: xmain.width*0.5-labelTHP.contentWidth
+                    height: 30
+                    border.width: 1
+                    clip: true
+                    TextInput{
+                        width: parent.width*0.96
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        maximumLength: 30
+                    }
+                }
+                Text {
+                    id: labelUnityTHP
+                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                    text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
+                    height:30
+                    font.pixelSize: app.fs
             }
-        }
+            }
+
+
+            Row{
+                spacing: app.fs
+                Text {
+                    id: labelTorque
+                    text:appSettings.idioma==='Español'? 'Torque total': 'Total Torque'
+                    height:30
+                    font.pixelSize: app.fs
+
+                }
+                Rectangle{
+                    width: xmain.width*0.5-labelTorque.contentWidth
+                    height: 30
+                    border.width: 1
+                    clip: true
+                    TextInput{
+                        width: parent.width*0.96
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        maximumLength: 30
+                    }
+                }
+                Text {
+                    id: labelUnityTorque
+                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                    text: appSettings.unidades==='Sistema Ingles'? 'lb/ft': 'N/m'
+                    height:30
+                    font.pixelSize: app.fs
+            }
+            }
+            Row{
+                spacing: app.fs
+                Text {
+                    id: labelDensity
+                    text:appSettings.idioma==='Español'? 'Densidad': 'Density'
+                    height:30
+                    font.pixelSize: app.fs
+
+                }
+                Rectangle{
+                    width: xmain.width*0.5-labelDensity.contentWidth
+                    height: 30
+                    border.width: 1
+                    clip: true
+                    TextInput{
+                        width: parent.width*0.96
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        maximumLength: 30
+                    }
+                }
+                Text {
+                    id: labelUnityDensity
+                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                    text: appSettings.unidades==='Sistema Ingles'? 'lb/gal': 'kg/m3'
+                    height:30
+                    font.pixelSize: app.fs
+            }
+            }
+            Row{
+                spacing: app.fs
+                Text {
+                    id: labelTVD
+                    text: "TVD"
+                    height:30
+                    font.pixelSize: app.fs
+
+                }
+                Rectangle{
+                    width: xmain.width*0.5-labelTVD.contentWidth
+                    height: 30
+                    border.width: 1
+                    clip: true
+                    TextInput{
+                        width: parent.width*0.96
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        maximumLength: 30
+                    }
+                }
+                Text {
+                    id: labelUnityTVD
+                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                    text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
+                    height:30
+                    font.pixelSize: app.fs
+            }
+            }
+            Row{
+                spacing: app.fs
+                Text {
+                    id: labelCaudal
+                    text:appSettings.idioma==='Español'? 'Caudal': 'Flow Rate'
+                    height:30
+                    font.pixelSize: app.fs
+
+                }
+                Rectangle{
+                    width: xmain.width*0.5-labelCaudal.contentWidth
+                    height: 30
+                    border.width: 1
+                    clip: true
+                    TextInput{
+                        width: parent.width*0.96
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        maximumLength: 30
+                    }
+                }
+                Text {
+                    id: labelUnityCaudal
+                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                    text: "BFPD" //REVISAR
+                    height:30
+                    font.pixelSize: app.fs
+            }
+            }
+            }
+ //LAS VARIABLES TERMINAN ACA
+
+
+            }
+
        
        
        
