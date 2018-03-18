@@ -1,20 +1,26 @@
 
-       
-       
         import QtQuick 2.0
         import QtQuick.Controls 1.4
         import Qt.labs.settings 1.0
        
+//Tipos de Datos màs comunes en QML o JavaScript
+//Tipo cadena de texto o tambièn llamado string. Son textos que se escriben entre comillas simples o dobles.
+//Tipo nùmero entero llamado int. Son nùmero enteros desde -656350 a  656350
+//Tipo float, double o real. Son tipos de nùmero con decimales
+//Tipo Objeto que se llama Object. Es algo, como ser una area, un rectàngulo, un mòdulo, Su forma bàsica es algo asi {nombre:"sfs", otroNombre:312}
         ApplicationWindow {
             id:app
-            visible: true//El parametro de ApplicationWindow llamado visible espera un valor del tipo booleano: true o false
+            visible: true //El parametro de ApplicationWindow llamado visible espera un valor del tipo booleano: true o falso
             width: 500
             height: 400
-            title: 'Nivel de Fluidos'
+            title: 'Nivel de Fluido Dinamico'
             visibility: 'Maximized'
             //onClosing: Qt.quit()
        
+            property int area: 0
             property int fs: 14//Tamaño de la letra
+            //property var modulo1: modCrearInforme
+            //property var modulo2: modModificarDatos
        
             Settings{
                 id: appSettings
@@ -22,16 +28,31 @@
                 property string idioma: 'Español'
                 property string unidades: 'Sistema Ingles'
                 property string fecha: '01/01/1970'
+       
+                onIdiomaChanged: {
+                    if(idioma==='Español'){
+                        if(appSettings.unidades==='English System'){
+                                appSettings.unidades='Sistema Ingles'
+                        }else{
+                                appSettings.unidades='Sistema Internacional'
+                        }
+                    }
+                }
             }
             menuBar: MenuBar {
                 Menu {
-                    title: "Registros"
+                    title: "NAVI"
                     MenuItem {
                         text: "Nuevo"
                         shortcut: "Ctrl+N"
                         onTriggered: {
-                            modCrearInforme.visible=true
+                            app.area=1
                         }
+                    }
+                    MenuItem {
+                        text: "Guardar"
+                        shortcut: "Ctrl+S"
+                        // para guardar datos al final ontriggered: ?
                     }
                     MenuItem {
                         text: appSettings.idioma==='Español'?"Salir": "Exit"
@@ -42,204 +63,49 @@
                     }
                 }
             }
-       
-       
+            Row{
+                spacing: 20
+            Text {
+                id: labelIdiomaActual
+                text:   appSettings.idioma==='Español' ?  'Idioma actual: <b>'+appSettings.idioma+'</b>' :  'Current Lanjuage: <b>'+appSettings.idioma+'</b>'
+                height: cbIdioma.height
+                font.pixelSize: 10
+
+                //COMO PONERLO ENN LA PARTE INFERIOR IZQUIERDA (NO PUDE CON ANCHORS) IGUAL QUE SISTEMA DE UNIDADES
+
+            }
+            Row{
+                spacing: 20
+                Text {
+                    id: labelSistemaActual
+                    height:30
+                    font.pixelSize: 10
+
+                }
+            }
+
+
+                }
+
             Rectangle{
                 id: xApp
-                width: 500
-                height: 500
+                width: app.width
+                height: app.height*0.8
                 //visible: false
-                //border.width: 1
                 anchors.centerIn: parent
                 clip: true
-                ModCrearInforme{id: modCrearInforme;visible: false;}
-
-
-                }
-//LAS VARIABLES EMPIEZAN DESDE ACA
-            Column{
-            Row{
-                spacing: app.fs
-                Text {
-                    id: labelCHP
-                    text: CHP
-                    height:30
-                    font.pixelSize: app.fs
-
-                }
-                Rectangle{
-                    width: xmain.width*0.5-labelCHP.contentWidth
-                    height: 30
-                    border.width: 1
-                    clip: true
-                    TextInput{
-                        width: parent.width*0.96
-                        height: app.fs
-                        font.pixelSize: app.fs
-                        maximumLength: 30
-                    }
-                }
-                Text {
-                    id: labelUnityCHP
-                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                    text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
-                    height:30
-                    font.pixelSize: app.fs
+                ModCrearInforme{id: modCrearInforme;visible: app.area===1;}
+                ModIngresarDatos{id: modIngresarDatos;visible: app.area===2;}
+       
+       
+       
             }
-            }
-            Row{
-                spacing: app.fs
-                Text {
-                    id: labelTHP
-                    text: THP
-                    height:30
-                    font.pixelSize: app.fs
-
-                }
-                Rectangle{
-                    width: xmain.width*0.5-labelTHP.contentWidth
-                    height: 30
-                    border.width: 1
-                    clip: true
-                    TextInput{
-                        width: parent.width*0.96
-                        height: app.fs
-                        font.pixelSize: app.fs
-                        maximumLength: 30
-                    }
-                }
-                Text {
-                    id: labelUnityTHP
-                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                    text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
-                    height:30
-                    font.pixelSize: app.fs
-            }
-            }
-
-
-            Row{
-                spacing: app.fs
-                Text {
-                    id: labelTorque
-                    text:appSettings.idioma==='Español'? 'Torque total': 'Total Torque'
-                    height:30
-                    font.pixelSize: app.fs
-
-                }
-                Rectangle{
-                    width: xmain.width*0.5-labelTorque.contentWidth
-                    height: 30
-                    border.width: 1
-                    clip: true
-                    TextInput{
-                        width: parent.width*0.96
-                        height: app.fs
-                        font.pixelSize: app.fs
-                        maximumLength: 30
-                    }
-                }
-                Text {
-                    id: labelUnityTorque
-                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                    text: appSettings.unidades==='Sistema Ingles'? 'lb/ft': 'N/m'
-                    height:30
-                    font.pixelSize: app.fs
-            }
-            }
-            Row{
-                spacing: app.fs
-                Text {
-                    id: labelDensity
-                    text:appSettings.idioma==='Español'? 'Densidad': 'Density'
-                    height:30
-                    font.pixelSize: app.fs
-
-                }
-                Rectangle{
-                    width: xmain.width*0.5-labelDensity.contentWidth
-                    height: 30
-                    border.width: 1
-                    clip: true
-                    TextInput{
-                        width: parent.width*0.96
-                        height: app.fs
-                        font.pixelSize: app.fs
-                        maximumLength: 30
-                    }
-                }
-                Text {
-                    id: labelUnityDensity
-                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                    text: appSettings.unidades==='Sistema Ingles'? 'lb/gal': 'kg/m3'
-                    height:30
-                    font.pixelSize: app.fs
-            }
-            }
-            Row{
-                spacing: app.fs
-                Text {
-                    id: labelTVD
-                    text: "TVD"
-                    height:30
-                    font.pixelSize: app.fs
-
-                }
-                Rectangle{
-                    width: xmain.width*0.5-labelTVD.contentWidth
-                    height: 30
-                    border.width: 1
-                    clip: true
-                    TextInput{
-                        width: parent.width*0.96
-                        height: app.fs
-                        font.pixelSize: app.fs
-                        maximumLength: 30
-                    }
-                }
-                Text {
-                    id: labelUnityTVD
-                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                    text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
-                    height:30
-                    font.pixelSize: app.fs
-            }
-            }
-            Row{
-                spacing: app.fs
-                Text {
-                    id: labelCaudal
-                    text:appSettings.idioma==='Español'? 'Caudal': 'Flow Rate'
-                    height:30
-                    font.pixelSize: app.fs
-
-                }
-                Rectangle{
-                    width: xmain.width*0.5-labelCaudal.contentWidth
-                    height: 30
-                    border.width: 1
-                    clip: true
-                    TextInput{
-                        width: parent.width*0.96
-                        height: app.fs
-                        font.pixelSize: app.fs
-                        maximumLength: 30
-                    }
-                }
-                Text {
-                    id: labelUnityCaudal
-                    //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                    text: "BFPD" //REVISAR
-                    height:30
-                    font.pixelSize: app.fs
-            }
-            }
-            }
- //LAS VARIABLES TERMINAN ACA
-
-
-            }
-
+       
+       
+       
+        }
+       
+       
        
        
        
