@@ -49,6 +49,11 @@
                         }
                     }
                     MenuItem {
+                        text: appSettings.idioma==='Español'?"Abrir": "Open"
+                        shortcut: "Ctrl+O"
+                        // para exportar datos al final ontriggered: ?
+                    }
+                    MenuItem {
                         text: appSettings.idioma==='Español'?"Guardar": "Save"
                         shortcut: "Ctrl+S"
                         // para guardar datos al final ontriggered: ?
