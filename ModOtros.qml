@@ -1,0 +1,393 @@
+
+
+
+import QtQuick 2.0
+import QtQuick.Controls 2.0
+
+Item {
+    id: xModIngresarDatos
+    anchors.fill: parent
+    onVisibleChanged: {
+        if(visible){
+            setearUI()
+        }
+    }
+
+
+
+Row{
+    spacing:20
+    x:30
+    y:40
+
+    Column{
+        spacing: 20
+        x: 40
+        y: 40
+        Rectangle{
+            id: xRdatos1
+            width: xModIngresarDatos.width*0.4-labelCHP.contentWidth
+            height:120
+            border.width: 2
+            border.color: '#A4A4A4'
+            color: '#D8D8D8'
+
+            Column{
+                anchors.centerIn: parent
+                spacing: 30
+
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelCHP
+                        text: "CHP"
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos1.width*0.5-labelCHP.contentWidth
+                        //width: 300
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiCHP
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                            anchors.centerIn: parent
+                        }
+                    }
+                    Text {
+                        id: labelUnityCHP
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        //text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelTHP
+                        text: "THP"
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos1.width*0.5-labelTHP.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiTHP
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                            anchors.centerIn: parent
+                        }
+                    }
+                    Text {
+                        id: labelUnityTHP
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        //text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+            }
+        }
+        Rectangle{
+            id: xRdatos2
+            width: xModIngresarDatos.width*0.4-labelCHP.contentWidth
+            height:170
+            border.width: 2
+            border.color: "#A4A4A4"
+            color: '#D8D8D8'
+
+            Column{
+                anchors.centerIn: parent
+                spacing: 30
+
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelTVD
+                        text: "TVD"
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos2.width*0.5-labelTVD.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiTVD
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                        }
+                    }
+                    Text {
+                        id: labelUnityTVD
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        //text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelIntake
+                        text: appSettings.idioma==='Español'? 'Profundidad de la Bomba': 'Intake'
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos2.width*0.5-labelIntake.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiIntake
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                        }
+                    }
+                    Text {
+                        id: labelUnityIntake
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        //text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelBomba
+                        text: appSettings.idioma==='Español'? 'Bomba': 'Pump'
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos2.width*0.5-labelIntake.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiPump
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 3
+                        }
+                    }
+                    Rectangle{
+                        width: xRdatos2.width*0.5-labelIntake.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 4
+                        }
+                    }
+
+                }
+            }
+        }
+}
+        Rectangle{
+            id: xRdatos3
+            width: xModIngresarDatos.width*0.4-labelCHP.contentWidth
+            height:170
+            border.width: 2
+            border.color: '#A4A4A4'
+            color: '#D8D8D8'
+
+            Column{
+                anchors.centerIn: parent
+                spacing: 30
+
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelCaudal
+                        text:appSettings.idioma==='Español'? 'Caudal': 'Flow Rate'
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos3.width*0.5-labelCaudal.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiCaudal
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                        }
+                    }
+
+                    Text {
+                        id: labelUnityCaudal
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        text: 'BFPD'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelBSW
+                        text:'BSW'
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos3.width*0.5-labelBSW.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiBSW
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                        }
+                    }
+                    Text {
+                        id: labelUnityBSW
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        text: '%'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+
+                Row{
+                    spacing: app.fs
+                    Text {
+                        id: labelDensity
+                        text:appSettings.idioma==='Español'? 'Densidad': 'Density'
+                        height:30
+                        font.pixelSize: app.fs
+
+                    }
+                    Rectangle{
+                        width: xRdatos3.width*0.5-labelDensity.contentWidth
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiDensity
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                            anchors.centerIn: parent
+                        }
+                    }
+                    Text {
+                        id: labelUnityDensity
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        //text: appSettings.unidades==='Sistema Ingles'? 'lb/gal': 'kg/m3'
+                        height:30
+                        font.pixelSize: app.fs
+                    }
+                }
+            }
+
+        }
+}
+
+function calcular(){
+
+    var datoTiCHP = parseFloat(tiCHP.text)
+    var datoTiTHP = parseFloat(tiTHP.text)
+    var datoTiIntake = parseFloat (tiIntake.text)
+    var datoTiTVD = parseFloat (tiTVD.text)
+    var datoTiPump = parseFloat (tiPump.text)
+    var datoCaudal = parseFloat (tiCaudal.text)
+    var datoBSW = parseFloat (tiBSW.text)
+    var datoDensity = paseFloat (tiDensity.text)
+}
+
+
+    //FALTA TIPO DE BOMBA
+    /*Row{
+                                spacing: app.fs
+                                Button{
+                                    id: btnCalcular
+                                    text:appSettings.idioma==='Español'? 'Calcular': 'Calculate'
+                                    height:30
+                                    font.pixelSize: app.fs
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    onClicked: calcular()
+                                }
+
+                            }
+                        }
+                        Row{
+                            spacing: app.fs
+                            Text {
+                                id: txtResultadoProvisorio
+                                text: "Sin datos"
+                                height:30
+                                font.pixelSize: app.fs
+                            }
+                        }
+
+
+                    }
+
+                    function calcular(){
+                        //water/100*(fluido cm3*2)-(longitud1-longitud2)
+                        var datoTiCHP = parseFloat(tiCHP.text)
+                        var datoTiTHP = parseFloat(tiTHP.text)
+                        var res1 = datoTiCHP+datoTiTHP
+
+                        var resultadoFinal = res1//calcular todos los otros res1*( res2)/ res3
+                        txtResultadoProvisorio.text='Se calculo CHP+THP='+resultadoFinal
+                    }*/
+
+    function setearUI(){
+        if(appSettings.idioma==='Español'){
+            labelSistemaActual.text='<b>Sistema Actual de Unidades: </b>'+appSettings.unidades
+            labelUnityCHP.text = appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
+            labelUnityTHP.text=appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
+            labelUnityTVD.text=appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
+            labelUnityDensity.text=appSettings.unidades==='Sistema Ingles'? 'Lb/gal': 'Kg/m3'
+            labelUnityIntake.text=appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
+        }else{
+            labelSistemaActual.text='<b>Unity Current System: </b>'+appSettings.unidades
+            labelUnityCHP.text = appSettings.unidades==='English System'? 'Psi': 'Pa'
+            labelUnityTHP.text=appSettings.unidades==='English System'? 'Psi': 'Pa'
+            labelUnityTVD.text=appSettings.unidades==='English System'? 'ft': 'm'
+            labelUnityDensity.text=appSettings.unidades==='English System'? 'Lb/gal': 'Kg/m3'
+            labelUnityIntake.text=appSettings.unidades==='English System'? 'ft': 'm'
+        }
+    }
+}
