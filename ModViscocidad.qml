@@ -48,9 +48,7 @@
                                     model: [ '1 1/4', '1 1/8','1','5/8','7/8', 'Otro']
                                     width: xCrearInforme.width*0.7-labelLanguaje.contentWidth
                                     height: 15
-                                    onCurrentTextChanged: {
-                                        appSettings.idioma = currentText
-                                    }
+
                                 }
                                 Text{
                                     id:labelUnityDe
@@ -68,20 +66,12 @@
                                     anchors.verticalCenter: xTi2.verticalCenter
 
                                 }
-                                Rectangle{
-                                    id:xTi2
-                                    width: xVDstring.width-labelVDi.width
+                                ComboBox{
+                                    id: cbDi
+                                    model: [ '1.867','1.995','2.041','2.259','2.323','2.441','2.75','2.992','3.068','Otro']
+                                    width: xCrearInforme.width*0.7-labelLanguaje.contentWidth
                                     height: 15
-                                    border.width: 1
-                                    clip: true
-                                    TextInput{
-                                        id: tiDi
-                                        width: parent.width*0.96
-                                        height: app.fs
-                                        font.pixelSize: app.fs
-                                        anchors.centerIn: parent
-                                        maximumLength: 5
-                                    }
+
                                 }
                             }
                             Row{
