@@ -167,6 +167,8 @@ Row{
                     }
                     Text {
                         id: labelUnityIntake
+                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
+                        //text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
                         height:30
                         font.pixelSize: app.fs
                     }
@@ -175,7 +177,7 @@ Row{
                     spacing: app.fs
                     Text {
                         id: labelBomba
-                        text: appSettings.idioma==='Español'? 'Bomba (Sistema Metrico)': 'Pump (Metric System)'
+                        text: appSettings.idioma==='Español'? 'Bomba': 'Pump'
                         height:30
                         font.pixelSize: app.fs
 
@@ -183,17 +185,18 @@ Row{
                     ComboBox{
                         id: cbBomba
                         model: ['6' ,'10' ,'15' ,'20' ,'33' ,'43' ,'64' ,'85' ,'106EW' ,'120', '125', '127EW' ,'160' ,'200' , 'Otro']
-                        width: xModIngresarDatos.width*0.4-labelBomba.contentWidth
-                        height: 10
+                        width: xModIngresarDatos.width*0.2-labelBomba.contentWidth
+                        height: 20
 
                     }
                     ComboBox{
                         id: cbBomba2
                         model: [ '400','600','700','750','800','900','1000','1050','1200','1250','1400','1500','1600','1750','1800','2100','2400','2700', 'Otro']
-                        width: xModIngresarDatos.width*0.4-labelBomba.contentWidth
-                        height: 10
+                        width: xModIngresarDatos.width*0.2-labelBomba.contentWidth
+                        height: 20
 
                     }
+
 
                 }
             }
@@ -323,6 +326,7 @@ function calcular(){
 }
 
 
+    //FALTA TIPO DE BOMBA
     /*Row{
                                 spacing: app.fs
                                 Button{
