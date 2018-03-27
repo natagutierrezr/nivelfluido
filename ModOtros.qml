@@ -183,15 +183,15 @@ Row{
                     ComboBox{
                         id: cbBomba
                         model: ['6' ,'10' ,'15' ,'20' ,'33' ,'43' ,'64' ,'85' ,'106EW' ,'120', '125', '127EW' ,'160' ,'200' , 'Otro']
-                        width: xCrearInforme.width*0.7-labelLanguaje.contentWidth
-                        height: 15
+                        width: xModIngresarDatos.width*0.4-labelBomba.contentWidth
+                        height: 10
 
                     }
                     ComboBox{
                         id: cbBomba2
                         model: [ '400','600','700','750','800','900','1000','1050','1200','1250','1400','1500','1600','1750','1800','2100','2400','2700', 'Otro']
-                        width: xCrearInforme.width*0.7-labelLanguaje.contentWidth
-                        height: 15
+                        width: xModIngresarDatos.width*0.4-labelBomba.contentWidth
+                        height: 10
 
                     }
 
@@ -323,7 +323,6 @@ function calcular(){
 }
 
 
-    //FALTA TIPO DE BOMBA
     /*Row{
                                 spacing: app.fs
                                 Button{
