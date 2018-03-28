@@ -149,7 +149,14 @@
                 }
 
 
+            function calcular(){
+                        var datoTiTorque = parseFloat(tiTorque.text)
+                        var datoTiTorqueRe = parseFloat(tiTorqueRe.text)
+                        var datoTiTorqueFr = parseFloat(tiTorqueFr.text)
 
+                        var resTHi = datoTiTorque - datoTiTorqueFr - datoTiTorqueRe
+
+                        }
 
 
 

@@ -182,12 +182,12 @@
        
 }
 function calcular(){
-            var datoTiDi = parseFloat(tiDi.text)
-            var datoTiDe = parseFloat(tiDe.text)
+            var datoTiDi = parseFloat(cbDi.text)
+            var datoTiDstring = parseFloat(cbDstring.text)
             var datoTiViscosity = parseFloat(tiViscosity.text)
             var datoTiRPM = parseFloat(tiRPM.text)
             var datoTiTVD = parseFloat(tiTVD.text)
-            var res1 = ((2.39*10^-8)*datoTiViscosity^3*datoTVD*datoTiRPM*DatoTiDe)/(DatoDi-DatoDe) //REVISAR ECUACION
+            var resTRe = ((2.39*10^-8)*datoTiViscosity*datoTiTVD*datoTiRPM*datoTiDstring^3)/(datoTiDi-datoTiDstring)
 
             }
 function setearUI(){
