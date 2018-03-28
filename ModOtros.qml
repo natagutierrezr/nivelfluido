@@ -2,7 +2,7 @@
 
 
 import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick.Controls 1.4
 
 Item {
     id: xModIngresarDatos
@@ -62,8 +62,6 @@ Row{
                     }
                     Text {
                         id: labelUnityCHP
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
                         height:30
                         font.pixelSize: app.fs
                     }
@@ -93,8 +91,6 @@ Row{
                     }
                     Text {
                         id: labelUnityTHP
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
                         height:30
                         font.pixelSize: app.fs
                     }
@@ -137,8 +133,6 @@ Row{
                     }
                     Text {
                         id: labelUnityTVD
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
                         height:30
                         font.pixelSize: app.fs
                     }
@@ -167,8 +161,6 @@ Row{
                     }
                     Text {
                         id: labelUnityIntake
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
                         height:30
                         font.pixelSize: app.fs
                     }
@@ -177,7 +169,7 @@ Row{
                     spacing: app.fs
                     Text {
                         id: labelBomba
-                        text: appSettings.idioma==='Español'? 'Bomba': 'Pump'
+                        text: appSettings.idioma==='Español'? 'Bomba <br>(Sistema Metrico)': 'Pump <br> (Metric System)'
                         height:30
                         font.pixelSize: app.fs
 
@@ -185,14 +177,14 @@ Row{
                     ComboBox{
                         id: cbBomba
                         model: ['6' ,'10' ,'15' ,'20' ,'33' ,'43' ,'64' ,'85' ,'106EW' ,'120', '125', '127EW' ,'160' ,'200' , 'Otro']
-                        width: xModIngresarDatos.width*0.2-labelBomba.contentWidth
+                        width: xRDatos2.width*0.5-labelBomba.contentWidth
                         height: 20
 
                     }
                     ComboBox{
                         id: cbBomba2
                         model: [ '400','600','700','750','800','900','1000','1050','1200','1250','1400','1500','1600','1750','1800','2100','2400','2700', 'Otro']
-                        width: xModIngresarDatos.width*0.2-labelBomba.contentWidth
+                        width: xRDatos2.width*0.3-labelBomba.contentWidth
                         height: 20
 
                     }
@@ -270,7 +262,6 @@ Row{
                     }
                     Text {
                         id: labelUnityBSW
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
                         text: '%'
                         height:30
                         font.pixelSize: app.fs
@@ -302,8 +293,6 @@ Row{
                     }
                     Text {
                         id: labelUnityDensity
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'lb/gal': 'kg/m3'
                         height:30
                         font.pixelSize: app.fs
                     }
@@ -326,7 +315,7 @@ function calcular(){
 }
 
 
-    //FALTA TIPO DE BOMBA
+
     /*Row{
                                 spacing: app.fs
                                 Button{
