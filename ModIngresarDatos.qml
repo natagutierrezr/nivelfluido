@@ -12,26 +12,54 @@
                     setearUI()
                 }
             }
-            //property int currentIndex: 1
+
        
        
-            Column{
+            Row{
        
        
                 anchors.centerIn: parent
                 spacing: 30
        
-                Row{
-                    spacing: app.fs
+                Column{
+                    spacing: 15
                     Text {
                         id: labelTorque
                         text:appSettings.idioma==='Español'? 'Torque total': 'Total Torque'
                         height:30
                         font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
 
                     }
+                    Text {
+                        id: labelTorqueFr
+                        text:appSettings.idioma==='Español'? 'Torque de fricción':'Friction Torque'
+                        height:30
+                        font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
+
+                    }
+                    Text {
+                        id: labelTorqueRe
+                        text:appSettings.idioma==='Español'? 'Torque Resistivo':'Resistive Torque'
+                        height:30
+                        font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
+
+                    }
+                    Text {
+                        id: labelTorqueHi
+                        text:appSettings.idioma==='Español'? 'Torque Hidráulico':'Hydraulic Torque'
+                        height:30
+                        font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
+
+                    }
+}
+                Column{
+                    spacing: 15
                     Rectangle{
-                        width: xModIngresarDatos.width*0.5-labelTorque.contentWidth
+                        width: xModIngresarDatos.width*0.5
                         height: 30
                         border.width: 1
                         clip: true
@@ -41,30 +69,12 @@
                             height: app.fs
                             font.pixelSize: app.fs
                             maximumLength: 30
+                            anchors.centerIn: parent
 
                         }
                     }
-                    Text {
-                        id: labelUnityTorque
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'lb/ft': 'N/m'
-                        height:30
-                        font.pixelSize: app.fs
-                    }
-                }
-
-
-                Row{
-                    spacing: app.fs
-                    Text {
-                        id: labelTorqueFr
-                        text:appSettings.idioma==='Español'? 'Torque de fricción':'Friction Torque'
-                        height:30
-                        font.pixelSize: app.fs
-
-                    }
                     Rectangle{
-                        width: xModIngresarDatos.width*0.5-labelTorqueFr.contentWidth
+                        width: xModIngresarDatos.width*0.5
                         height: 30
                         border.width: 1
                         clip: true
@@ -77,86 +87,73 @@
                             anchors.centerIn: parent
                         }
                     }
+                    Rectangle{
+                          width: xModIngresarDatos.width*0.5
+                          height: 30
+                          border.width: 1
+                          clip: true
+                          TextInput{
+                              id: tiTorqueRe
+                              width: parent.width*0.96
+                              height: app.fs
+                              font.pixelSize: app.fs
+                              maximumLength: 30
+                              anchors.centerIn: parent
+                          }
+                      }
+                    Rectangle{
+                         width: xModIngresarDatos.width*0.5
+                         height: 30
+                         border.width: 1
+                         clip: true
+                         TextInput{
+                             id: tiTorqueHi
+                             width: parent.width*0.96
+                             height: app.fs
+                             font.pixelSize: app.fs
+                             maximumLength: 30
+                             anchors.centerIn: parent
+                         }
+                     }
+                   }
+                Column{
+                    spacing: 15
                     Text {
-                        id: labelUnityTorqueFr
-                        //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                        //text: appSettings.unidades==='Sistema Ingles'? 'lb/ft': 'N/m'
+                        id: labelUnityTorque
                         height:30
                         font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
                     }
+                    Text {
+                         id: labelUnityTorqueFr
+                         height:30
+                         font.pixelSize: app.fs
+                         verticalAlignment: Text.AlignVCenter
+                     }
+
+                    Text {
+                        id: labelUnityTorqueRe
+
+                        height:30
+                        font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    Text {
+                        id: labelUnityTorqueHi
+
+                        height:30
+                        font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                 }
                 }
 
-                    Row{
-                        spacing: app.fs
-                        Text {
-                            id: labelTorqueRe
-                            text:appSettings.idioma==='Español'? 'Torque Resistivo':'Resistive Torque'
-                            height:30
-                            font.pixelSize: app.fs
-
-                        }
-                        Rectangle{
-                            width: xModIngresarDatos.width*0.5-labelTorqueRe.contentWidth
-                            height: 30
-                            border.width: 1
-                            clip: true
-                            TextInput{
-                                id: tiTorqueRe
-                                width: parent.width*0.96
-                                height: app.fs
-                                font.pixelSize: app.fs
-                                maximumLength: 30
-                                anchors.centerIn: parent
-                            }
-                        }
 
 
-                        Text {
-                            id: labelUnityTorqueRe
-                            //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                            //text: appSettings.unidades==='Sistema Ingles'? 'lb/ft': 'N/m'
-                            height:30
-                            font.pixelSize: app.fs
-                        }
-                    }
-                    Row{
-                        spacing: app.fs
-                        Text {
-                            id: labelTorqueHi
-                            text:appSettings.idioma==='Español'? 'Torque Hidráulico':'Hydraulic Torque'
-                            height:30
-                            font.pixelSize: app.fs
-
-                        }
-                        Rectangle{
-                            width: xModIngresarDatos.width*0.5-labelTorqueHi.contentWidth
-                            height: 30
-                            border.width: 1
-                            clip: true
-                            TextInput{
-                                id: tiTorqueHi
-                                width: parent.width*0.96
-                                height: app.fs
-                                font.pixelSize: app.fs
-                                maximumLength: 30
-                                anchors.centerIn: parent
-                            }
-                        }
 
 
-                        Text {
-                            id: labelUnityTorqueHi
-                            //COMO PONGO ACA EL CONDICIONAL DEL IDIOMA AL TIEMPO?
-                            //text: appSettings.unidades==='Sistema Ingles'? 'lb/ft': 'N/m'
-                            height:30
-                            font.pixelSize: app.fs
-                        }
-                    }
 
 
-}
-
-            //FALTA TIPO DE BOMBA
             /*Row{
                                         spacing: app.fs
                                         Button{
