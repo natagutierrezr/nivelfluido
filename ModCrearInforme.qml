@@ -10,6 +10,11 @@
             border.width: 1
             anchors.centerIn: parent
             clip: true
+
+            property alias nombreCampo: tiNombreCampo.text
+            property alias nombrePozo: tiNombrePozo.text
+            property alias nombreOperario: tiNombreOperario.text
+
             onVisibleChanged: {
                 if(visible){
                     setearUI()
@@ -92,6 +97,22 @@
                         border.width: 1
                         clip: true
                         TextInput{
+                            id: tiNombreCampo
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            anchors.centerIn: parent
+                            maximumLength: 30
+                        }
+                    }
+                    Rectangle{
+
+                        width: xCrearInforme.width*0.5
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+                            id: tiNombrePozo
                             width: parent.width*0.96
                             height: app.fs
                             font.pixelSize: app.fs
@@ -105,19 +126,7 @@
                         border.width: 1
                         clip: true
                         TextInput{
-                            width: parent.width*0.96
-                            height: app.fs
-                            font.pixelSize: app.fs
-                            anchors.centerIn: parent
-                            maximumLength: 30
-                        }
-                    }
-                    Rectangle{
-                        width: xCrearInforme.width*0.5
-                        height: 30
-                        border.width: 1
-                        clip: true
-                        TextInput{
+                            id: tiNombreOperario
                             width: parent.width*0.96
                             height: app.fs
                             font.pixelSize: app.fs

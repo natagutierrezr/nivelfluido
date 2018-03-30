@@ -7,6 +7,15 @@ import QtQuick.Controls 1.4
 Item {
     id: xModIngresarDatos
     anchors.fill: parent
+
+    property alias valorCHP: tiCHP.text
+    property alias valorTHP: tiTHP.text
+    property alias valorTVD: tiTVD.text
+    property alias valorIntake: tiIntake.text
+    property alias valorDensity: tiDensity.text
+    property alias valorBomba1: cbBomba.currentText
+    property alias valorBomba2: cbBomba2.currentText
+
     onVisibleChanged: {
         if(visible){
             setearUI()
@@ -179,7 +188,7 @@ Row{
                        ComboBox{
                         id: cbBomba
                         model: ['6' ,'10' ,'15' ,'20' ,'33' ,'43' ,'64' ,'85' ,'106EW' ,'120', '125', '127EW' ,'160' ,'200' , 'Otro']
-                        width: xRDatos2.width*0.15
+                        width: xRdatos2.width*0.15
                         height: 30
 
 
@@ -187,7 +196,7 @@ Row{
                        ComboBox{
                                id: cbBomba2
                                model: [ '400','600','700','750','800','900','1000','1050','1200','1250','1400','1500','1600','1750','1800','2100','2400','2700', 'Otro']
-                               width: xRDatos2.width*0.3-labelBomba.contentWidth
+                               width: xRdatos2.width*0.15
                                height: 30
 
 
@@ -333,8 +342,11 @@ Row{
 
 function calcular(){
 
-    var datoTiCHP = parseFloat(tiCHP.text)
-    var datoTiTHP = parseFloat(tiTHP.text)
+    var v1 = cbDi.currentText.replace('EW','')
+    var v2 = cbDstring.currentText.replace('EW','')
+
+    var datoTiCHP = parseFloat(v1)
+    var datoTiTHP = parseFloat(v2)
     var datoTiIntake = parseFloat (tiIntake.text)
     var datoTiTVD = parseFloat (tiTVD.text)
     var datoTiPump = parseFloat (tiPump.text)
