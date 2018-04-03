@@ -1,23 +1,25 @@
 
-       
-       
         import QtQuick 2.0
         import QtQuick.Controls 2.0
        
         Item {
             id: xModIngresarDatos
             anchors.fill: parent
+            property string datoTRE: '?'
+            property int modoViscocidad: -1
+            property var objViscocidad
+       
+            //property alias datoTRE: tiTorqueRe.text
+       
             onVisibleChanged: {
                 if(visible){
                     setearUI()
                 }
             }
-
+       
        
        
             Row{
-       
-       
                 anchors.centerIn: parent
                 spacing: 30
        
@@ -29,7 +31,7 @@
                         height:30
                         font.pixelSize: app.fs
                         verticalAlignment: Text.AlignVCenter
-
+       
                     }
                     Text {
                         id: labelTorqueFr
@@ -37,7 +39,7 @@
                         height:30
                         font.pixelSize: app.fs
                         verticalAlignment: Text.AlignVCenter
-
+       
                     }
                     Text {
                         id: labelTorqueRe
@@ -45,7 +47,7 @@
                         height:30
                         font.pixelSize: app.fs
                         verticalAlignment: Text.AlignVCenter
-
+       
                     }
                     Text {
                         id: labelTorqueHi
@@ -53,9 +55,9 @@
                         height:30
                         font.pixelSize: app.fs
                         verticalAlignment: Text.AlignVCenter
-
+       
                     }
-}
+                }
                 Column{
                     spacing: 15
                     Rectangle{
@@ -70,7 +72,7 @@
                             font.pixelSize: app.fs
                             maximumLength: 30
                             anchors.centerIn: parent
-
+       
                         }
                     }
                     Rectangle{
@@ -88,34 +90,44 @@
                         }
                     }
                     Rectangle{
-                          width: xModIngresarDatos.width*0.5
-                          height: 30
-                          border.width: 1
-                          clip: true
-                          TextInput{
-                              id: tiTorqueRe
-                              width: parent.width*0.96
-                              height: app.fs
-                              font.pixelSize: app.fs
-                              maximumLength: 30
-                              anchors.centerIn: parent
-                          }
-                      }
+                        width: xModIngresarDatos.width*0.5
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        Text{
+                            text: xModIngresarDatos.datoTRE
+                            id: tiTorqueRe
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            anchors.centerIn: parent
+                            Timer{
+                                running: true
+                                repeat: true
+                                interval: 500
+                                onTriggered: {
+                                    //console.log('Modo Viscocidad Detectado: '+objViscocidad.modo)
+                                    tiTorqueRe.text=''+modViscosidad.getTRE()
+                                }
+                            }
+                        }
+                    }
                     Rectangle{
-                         width: xModIngresarDatos.width*0.5
-                         height: 30
-                         border.width: 1
-                         clip: true
-                         TextInput{
-                             id: tiTorqueHi
-                             width: parent.width*0.96
-                             height: app.fs
-                             font.pixelSize: app.fs
-                             maximumLength: 30
-                             anchors.centerIn: parent
-                         }
-                     }
-                   }
+                        width: xModIngresarDatos.width*0.5
+                        height: 30
+                        border.width: 1
+                        clip: true
+                        TextInput{
+       
+                            id: tiTorqueHi
+                            width: parent.width*0.96
+                            height: app.fs
+                            font.pixelSize: app.fs
+                            maximumLength: 30
+                            anchors.centerIn: parent
+                        }
+                    }
+                }
                 Column{
                     spacing: 15
                     Text {
@@ -125,77 +137,77 @@
                         verticalAlignment: Text.AlignVCenter
                     }
                     Text {
-                         id: labelUnityTorqueFr
-                         height:30
-                         font.pixelSize: app.fs
-                         verticalAlignment: Text.AlignVCenter
-                     }
-
+                        id: labelUnityTorqueFr
+                        height:30
+                        font.pixelSize: app.fs
+                        verticalAlignment: Text.AlignVCenter
+                    }
+       
                     Text {
                         id: labelUnityTorqueRe
-
+       
                         height:30
                         font.pixelSize: app.fs
                         verticalAlignment: Text.AlignVCenter
                     }
                     Text {
                         id: labelUnityTorqueHi
-
+       
                         height:30
                         font.pixelSize: app.fs
                         verticalAlignment: Text.AlignVCenter
                     }
-                 }
                 }
-
-
+            }
+       
+       
             function calcular(){
-                        var datoTiTorque = parseFloat(tiTorque.text)
-                        var datoTiTorqueRe = parseFloat(tiTorqueRe.text)
-                        var datoTiTorqueFr = parseFloat(tiTorqueFr.text)
-
-                        var resTHi = datoTiTorque - datoTiTorqueFr - datoTiTorqueRe
-
-                        }
-
-
-
-
+                var datoTiTorque = parseFloat(tiTorque.text)
+                var datoTiTorqueRe = parseFloat(tiTorqueRe.text)
+                var datoTiTorqueFr = parseFloat(tiTorqueFr.text)
+       
+                var resTHi = datoTiTorque - datoTiTorqueFr - datoTiTorqueRe
+       
+            }
+       
+       
+       
+       
             /*Row{
-                                        spacing: app.fs
-                                        Button{
-                                            id: btnCalcular
-                                            text:appSettings.idioma==='Español'? 'Calcular': 'Calculate'
-                                            height:30
-                                            font.pixelSize: app.fs
-                                            anchors.horizontalCenter: parent.horizontalCenter
-                                            onClicked: calcular()
+                                                spacing: app.fs
+                                                Button{
+                                                    id: btnCalcular
+                                                    text:appSettings.idioma==='Español'? 'Calcular': 'Calculate'
+                                                    height:30
+                                                    font.pixelSize: app.fs
+                                                    anchors.horizontalCenter: parent.horizontalCenter
+                                                    onClicked: calcular()
+                                                }
+  
+                                            }
+                                        }
+                                        Row{
+                                            spacing: app.fs
+                                            Text {
+                                                id: txtResultadoProvisorio
+                                                text: "Sin datos"
+                                                height:30
+                                                font.pixelSize: app.fs
+                                            }
                                         }
   
+  
                                     }
-                                }
-                                Row{
-                                    spacing: app.fs
-                                    Text {
-                                        id: txtResultadoProvisorio
-                                        text: "Sin datos"
-                                        height:30
-                                        font.pixelSize: app.fs
-                                    }
-                                }
   
+                                    function calcular(){
+                                        //water/100*(fluido cm3*2)-(longitud1-longitud2)
+                                        var datoTiCHP = parseFloat(tiCHP.text)
+                                        var datoTiTHP = parseFloat(tiTHP.text)
+                                        var res1 = datoTiCHP+datoTiTHP
   
-                            }
-  
-                            function calcular(){
-                                //water/100*(fluido cm3*2)-(longitud1-longitud2)
-                                var datoTiCHP = parseFloat(tiCHP.text)
-                                var datoTiTHP = parseFloat(tiTHP.text)
-                                var res1 = datoTiCHP+datoTiTHP
-  
-                                var resultadoFinal = res1//calcular todos los otros res1*( res2)/ res3
-                                txtResultadoProvisorio.text='Se calculo CHP+THP='+resultadoFinal
-                            }*/
+                                        var resultadoFinal = res1//calcular todos los otros res1*( res2)/ res3
+                                        txtResultadoProvisorio.text='Se calculo CHP+THP='+resultadoFinal
+                                    }*/
        
             function setearUI(){
                 if(appSettings.idioma==='Español'){
@@ -203,7 +215,7 @@
                     labelUnityTorque.text=appSettings.unidades==='Sistema Ingles'? 'Lb/ft': 'N/m'
                     labelUnityTorqueFr.text=appSettings.unidades==='Sistema Ingles'? 'Lb/ft': 'N/m'
                     labelUnityTorqueRe.text=appSettings.unidades==='Sistema Ingles'? 'Lb/ft': 'N/m'
-                     labelUnityTorqueHi.text=appSettings.unidades==='Sistema Ingles'? 'Lb/ft': 'N/m'
+                    labelUnityTorqueHi.text=appSettings.unidades==='Sistema Ingles'? 'Lb/ft': 'N/m'
                 }else{
                     labelSistemaActual.text='<b>Unity Current System: </b>'+appSettings.unidades
                     labelUnityTorque.text=appSettings.unidades==='English System'? 'Lb/ft': 'N/m'
@@ -214,3 +226,4 @@
             }
         }
        
+     
