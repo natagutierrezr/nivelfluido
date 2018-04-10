@@ -9,6 +9,7 @@
                 Item {
                     id: xModOtros
                     anchors.fill: parent
+                    clip:true
          
                     property alias valorCHP: tiCHP.text
                     property alias valorTHP: tiTHP.text
@@ -266,6 +267,14 @@
                                         verticalAlignment: Text.AlignVCenter
          
                                     }
+                                    Text {
+                                        id: labelPwf
+                                        text:appSettings.idioma==='Español'? 'Pwf': 'BHP'
+                                        height:30
+                                        font.pixelSize: app.fs
+                                        verticalAlignment: Text.AlignVCenter
+
+                                    }
                                 }
                                 Column{
                                     spacing: 10
@@ -293,7 +302,7 @@
                                                        width: parent.width*0.96
                                                        height: app.fs
                                                        font.pixelSize: app.fs
-                                                       maximumLength: 30
+                                                       maximumLength: 2
                                                        anchors.centerIn: parent
                                                    }
                                                }
@@ -304,6 +313,20 @@
                                           clip: true
                                           TextInput{
                                               id: tiDensity
+                                              width: parent.width*0.96
+                                              height: app.fs
+                                              font.pixelSize: app.fs
+                                              maximumLength: 30
+                                              anchors.centerIn: parent
+                                          }
+                                      }
+                                    Rectangle{
+                                          width: xRdatos3.width*0.5
+                                          height: 30
+                                          border.width: 1
+                                          clip: true
+                                          TextInput{
+                                              id: tiPwf
                                               width: parent.width*0.96
                                               height: app.fs
                                               font.pixelSize: app.fs
@@ -334,6 +357,12 @@
                                             font.pixelSize: app.fs
                                             verticalAlignment: Text.AlignVCenter
                                         }
+                                    Text {
+                                            id: labelUnityPwf
+                                            height:30
+                                            font.pixelSize: app.fs
+                                            verticalAlignment: Text.AlignVCenter
+                                        }
                                 }
          
          
@@ -341,9 +370,26 @@
          
                         }
                 }
+                Timer{
+                        id:timerTVD
+                        running: true
+                        repeat: true
+                        interval: 250.
+                        onTriggered: {
+                            if(modViscosidad.getModo()===0){
+                                tiTVD.enabled = true
+                            }else{
+                                tiTVD.text = ''+modViscosidad.getTVD()
+                                tiTVD.enabled = false
+                            }
+                        }
+                    }
                 Component.onCompleted: {
                     app.objModOtros = xModOtros
                 }
+
+
+
                 function setCB1(t){
                     for(var i=0;i<cbBomba.count;i++){
                         if(cbBomba.model[i] === t){
@@ -361,8 +407,7 @@
                     }
                 }
          
-                function calcular(){
-         
+                function calcular(){         
                     var v1 = cbDi.currentText.replace('EW','')
                     var v2 = cbDstring.currentText.replace('EW','')
          
@@ -376,7 +421,7 @@
                     var datoDensity = paseFloat (tiDensity.text)
        
        
-                    var resDeltaP = /*resTHi*/ 1/(0.0897*((datoTiPump*6.28)/100))
+                    var resDeltaP = modIngresarDatos.getTHi()/(0.0897*((datoTiPump*6.28)/100))
                     var resPOil = datoTiTVD*0.433*(1-datoBSW)*(datoDensity/8.33)
                     var resPWater = datoTiTVD*0.433*datoBSW
                     var resPLiq = resPOil+resPWater
@@ -392,41 +437,7 @@
          
          
          
-                    /*Row{
-                                                spacing: app.fs
-                                                Button{
-                                                    id: btnCalcular
-                                                    text:appSettings.idioma==='Español'? 'Calcular': 'Calculate'
-                                                    height:30
-                                                    font.pixelSize: app.fs
-                                                    anchors.horizontalCenter: parent.horizontalCenter
-                                                    onClicked: calcular()
-                                                }
-    
-                                            }
-                                        }
-                                        Row{
-                                            spacing: app.fs
-                                            Text {
-                                                id: txtResultadoProvisorio
-                                                text: "Sin datos"
-                                                height:30
-                                                font.pixelSize: app.fs
-                                            }
-                                        }
-    
-    
-                                    }
-    
-                                    function calcular(){
-                                        //water/100*(fluido cm3*2)-(longitud1-longitud2)
-                                        var datoTiCHP = parseFloat(tiCHP.text)
-                                        var datoTiTHP = parseFloat(tiTHP.text)
-                                        var res1 = datoTiCHP+datoTiTHP
-    
-                                        var resultadoFinal = res1//calcular todos los otros res1*( res2)/ res3
-                                        txtResultadoProvisorio.text='Se calculo CHP+THP='+resultadoFinal
-                                    }*/
+
          
                     function setearUI(){
                         if(appSettings.idioma==='Español'){
@@ -436,14 +447,26 @@
                             labelUnityTVD.text=appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
                             labelUnityDensity.text=appSettings.unidades==='Sistema Ingles'? 'Lb/gal': 'Kg/m3'
                             labelUnityIntake.text=appSettings.unidades==='Sistema Ingles'? 'ft': 'm'
+                            labelUnityPwf.text=appSettings.unidades==='Sistema Ingles'? 'Psi': 'Pa'
                         }else{
                             labelSistemaActual.text='<b>Unity Current System: </b>'+appSettings.unidades
                             labelUnityCHP.text = appSettings.unidades==='English System'? 'Psi': 'Pa'
                             labelUnityTHP.text=appSettings.unidades==='English System'? 'Psi': 'Pa'
                             labelUnityTVD.text=appSettings.unidades==='English System'? 'ft': 'm'
                             labelUnityDensity.text=appSettings.unidades==='English System'? 'Lb/gal': 'Kg/m3'
-                            labelUnityIntake.text=appSettings.unidades==='English System'? 'ft': 'm'
+                            labelUnityPwf.text=appSettings.unidades==='English System'? 'Psi': 'Pa'
                         }
+                    }
+                    Button{
+                        id: botOK
+                        text:'OK'
+                        anchors.right: parent.right
+                        anchors.rightMargin: app.fs
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: app.fs
+                        /*onClicked: {
+                            CHECKEAR LOS DATOS
+                        }*/
                     }
                 }
            

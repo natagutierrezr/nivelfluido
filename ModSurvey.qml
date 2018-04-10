@@ -6,6 +6,7 @@
                 Item {
                     id:raiz
                     anchors.fill: parent
+                    clip:true
                     onVisibleChanged: {
                         if(visible){
                             //getDatosSurvey()
@@ -41,6 +42,34 @@
                             model: lm
                             clip: true
                             spacing:2
+
+                            Rectangle{
+                                id:loadingDatos
+                                visible: false
+                                width: txtLoading.contentWidth+app.fs*2
+                                height: app.fs*2
+                                color: 'transparent'
+                                border.width: 2
+                                radius: app.fs*0.5
+                                anchors.centerIn: parent
+                                Text {
+                                    id: txtLoading
+                                    text: "Cargando datos"
+                                    font.pixelSize: app.fs
+                                    anchors.centerIn: parent
+                                }
+                                Timer{
+                                    running: parent.visible
+                                    repeat: true
+                                    interval: 1000
+                                    onTriggered: {
+                                        txtLoading.text+='. '
+                                    }
+                                }
+
+                        }
+
+
                         }
                         Button{
                             id: botCargarTxt
@@ -127,6 +156,11 @@
                     FileDialog {
                         id: fileDialog
                         visible: false
+                        onVisibleChanged: {
+                            if(visible){
+                                loadingDatos.visible=true
+                            }
+                        }
                         //modality: fileDialogModal.checked ? Qt.WindowModal : Qt.NonModal
                         title: 'Seleccionar archivo de texto para Survey'
                         selectExisting: true
@@ -139,10 +173,17 @@
                         onAccepted: {
                            fileDialog.visible=false
                             lm.clear()
+
                             var ms0 = new Date(Date.now())
                             var ms1 = ''+ms0.getTime()
                             app.usurveyid = ms1
-                            var f=(''+fileUrls[0]).replace('file:///','')
+                            var f
+                            if(Qt.platform.os==='windows'){
+                                f=(''+fileUrls[0]).replace('file:///','')
+                            }else{
+                                f=(''+fileUrls[0]).replace('file://','')
+                            }
+                            unik.log('Cargando survey: '+f)
                             var mcarp0 = (''+fileUrls[0]).split('/')
                             var carp=''
                             for(var i2=0;i2<mcarp0.length-1;i2++){
@@ -170,7 +211,10 @@
                             getDatosSurvey()
                             //console.log(d)
                         }
-                        onRejected: { console.log("Rejected") }
+                        onRejected: {
+                            console.log("Rejected")
+                            oadingDatos.visible=false
+                        }
                     }
                     function getDatosSurvey(){
                         var sql = 'select * from survey where ms=\''+app.usurveyid+'\''
@@ -179,7 +223,7 @@
                         for(var i=0;i<rows.length;i++){
                             lm.append(lm.add(rows[i].col[1],rows[i].col[2],rows[i].col[3],rows[i].col[4] ))
                         }
-                    }
-         
+                        loadingDatos.visible=false
+                    }         
                 }
            

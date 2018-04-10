@@ -7,8 +7,9 @@
                 Item {
                     id:xModViscocidad
                     width: parent.width*0.7
-                      height: parent.height*0.9
+                    height: parent.height*0.9
                     anchors.centerIn: parent
+                    clip:true
                     property alias valorViscosidad: tiViscosity.text
                     property alias valorDstring: cbDstring.currentText
                     property alias valorDi: cbDi.currentText
@@ -198,6 +199,18 @@
                         }
                     }
                     Component.onCompleted: app.objModViscocidad = xModViscocidad
+
+                    Button{
+                        id: botOK
+                        text:'OK'
+                        anchors.right: parent.right
+                        anchors.rightMargin: app.fs
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: app.fs
+                        /*onClicked: {
+                            CHECKEAR LOS DATOS
+                        }*/
+                    }
          
          
                     function calcular(){
@@ -259,6 +272,19 @@
                             r = calcular()
                         }
                         return r
+                    }
+                    function getModo(){
+                        var r = -1
+                        if(rb1.checked){
+                            r= 0;
+                            //console.log('-------------------------')
+                        }else{
+                            r = 1
+                        }
+                        return r
+                    }
+                    function getTVD(){
+                        return parseFloat(tiTVD.text)
                     }
                 }
          

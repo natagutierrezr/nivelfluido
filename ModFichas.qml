@@ -17,17 +17,28 @@
                                         id: tabBar
                                         currentIndex: swipeView.currentIndex
                                         TabButton {
-                                            text: "Viscocidad"
+                                            text: appSettings.idioma==='Español'?"Viscocidad":'Viscosity'
                                             width: app.fs*10
                                         }
                                         TabButton {
                                             text: "Torques"
+                                            width: app.fs*10
                                         }
                                         TabButton {
-                                            text: "Otros datos"
+                                            text: appSettings.idioma==='Español'?"Otros datos":'Other data'
+                                            width: app.fs*10
                                         }
                                         TabButton {
                                             text: "Survey"
+                                            width: app.fs*10
+                                        }
+                                        TabButton {
+                                            text: appSettings.idioma==='Español'?"Reportes y resultados":'reports and results'
+                                            width: app.fs*10
+                                        }
+                                        TabButton {
+                                            text: appSettings.idioma==='Español'?"Graficas":'graphics'
+                                            width: app.fs*10
                                         }
                                     }
                             }
@@ -37,6 +48,7 @@
                                 anchors.bottom: xTabBar.bottom
                                 //width: raiz.width-app.fs*1.20
                                 //height: raiz.height
+                                //anchors.centerIn: parent
                                 currentIndex: tabBar.currentIndex
                                 onCurrentIndexChanged: {
                                     if(currentIndex===3){
@@ -47,6 +59,7 @@
                                     width: raiz.width
                                     height: raiz.height-tabBar.height
                                     color: '#D8D8D8'
+
                                     ModViscocidad{
                                         id:modViscosidad
                                         onModoCambiado: modIngresarDatos.modoViscocidad=m
