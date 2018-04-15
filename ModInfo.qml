@@ -2,16 +2,23 @@
         import QtQuick 2.0
         import QtQuick.Controls 1.4
        
-       
+ApplicationWindow {
+    id:app
+    visible: true //El parametro de ApplicationWindow llamado visible espera un valor del tipo booleano: true o falso
+    width: 400
+    height: 300
+    title: appSettings.idioma==='Español'?'Sobre NAVI':'About NAVI'
+
+
         Rectangle {
             id: xModInfo
             //anchors.fill: parent
             //width: 100
             //height: 62
             anchors.centerIn: parent
-            width: parent.width*0.3
-            height: parent.height*0.4
-            border.width: 1
+            width: 400
+            height: 300
+            border.width: 0
             color: '#F3E2A9'
 
             Text{
@@ -33,4 +40,5 @@
                 }
             }
         }
+}
      

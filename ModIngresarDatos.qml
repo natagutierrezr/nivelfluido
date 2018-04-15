@@ -103,6 +103,7 @@ Item {
                     height: app.fs
                     font.pixelSize: app.fs
                     anchors.centerIn: parent
+                    enabled: false
                     Timer{
                         running: true
                         repeat: true
@@ -127,6 +128,7 @@ Item {
                     font.pixelSize: app.fs
                     maximumLength: 30
                     anchors.centerIn: parent
+                    enabled: false
                 }
             }
         }
@@ -162,6 +164,38 @@ Item {
         }
     }
 
+    Button{
+        id: botOK
+        text:'OK'
+        anchors.right: parent.right
+        anchors.rightMargin: app.fs
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: app.fs
+        onClicked: {
+            modCompletado2=true
+            modFichas.fichaCompletada=2;
+        }
+
+        Timer{
+            id: timerControlUI
+            running: tabBar.currentIndex===0&&app.area===2
+            repeat: true
+            interval: 500
+            onTriggered: {
+
+                    if(tiTorque.text!==''&&tiTorqueFr.text!==''){
+                        botOK.enabled=false
+                    }else{
+                        botOK.enabled=true
+                    }
+
+            }
+        }
+
+    }
+
+    Component.onCompleted: xModIngresarDatos
+
     Timer{
         id:timerHI
         running: true
@@ -172,17 +206,15 @@ Item {
         }
     }
 
-    Button{
+    /*Button{
         id: botOK
         text:'OK'
         anchors.right: parent.right
         anchors.rightMargin: app.fs
         anchors.bottom: parent.bottom
         anchors.bottomMargin: app.fs
-        /*onClicked: {
-            CHECKEAR LOS DATOS
-        }*/
-    }
+
+    }*/
 
     function calcular(){
         var datoTiTorque = parseFloat(tiTorque.text)

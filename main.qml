@@ -33,6 +33,8 @@ ApplicationWindow {
         property string unidades: 'Sistema Ingles'
         property string fecha: '01/01/1970'
         property string ucs: unik.getPath(3)+'/Navi'
+        property string numViscOtros
+        property string cdiViscOtros
 
 
 
@@ -120,17 +122,17 @@ ApplicationWindow {
                 }
             }
            }
-        Button{ //NO APARECE EL BOTON
+        /*Button{ //NO APARECE EL BOTON
                 id: botRUN
                 text:appSettings.idioma==='Español'?'Correr': 'Run'
                 anchors.right: parent.right
                 anchors.rightMargin: app.fs
                 anchors.top: parent.bottom
                 anchors.topMargin: app.fs
-                /*onClicked: {
+                onClicked: {
                     CORRER PROGRAMA
-                }*/
-            }
+                }
+            }*/
 
 
 
